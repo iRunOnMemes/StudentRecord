@@ -15,7 +15,19 @@ public class StudentRecord
     */
    private double average(int first, int last)
    {
-      return 0; //here so the class compiles
+      if(first>=last){
+        return -1;
+    }
+        if(first<0||last<0||first>scores.length-1||last>scores.length-1){
+        return -2;
+    }
+        int sum = 0;
+        for(int i = first; i<=scores.length-1; i++){
+        sum+=scores[i];
+    }
+    return (double)sum/(last-first+1);
+  
+        //here so the class compiles part a
    }
     
    /** returns true if each successive value in scores is greater than
@@ -23,9 +35,13 @@ public class StudentRecord
     */
    private boolean hasImproved()
    {
-      return false; //here so the class compiles
-   }  
-   
+      for(int i = 1; i<=scores.length-1; i++){
+          if (scores[i]<scores[i-1]){
+              return false;
+            }
+      }  
+   return true;
+}
    /** if the values in scores have imrpoved, returns the average of
     *  the elements in scores with indexes greater than or equal to 
     *  scores.length/2; otherwise, returns the average of all the 
@@ -33,6 +49,10 @@ public class StudentRecord
     */
    public double finalAverage()
    {
-      return 0; //here so the class compiles
-   } 
+      if(this.hasImproved()){
+          return this.average(scores.length/2, scores.length-1);
+   }else{
+       return this.average(0, scores.length-1);
+    }
 }
+    }
